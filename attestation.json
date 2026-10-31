@@ -1,9 +1,0 @@
-{
-  "pluginId": "neobase.slides",
-  "repo": "NDesumeur/neobase-plugin-slides",
-  "version": "1.0.1",
-  "sha256": "71165e1b67563ee1dc6dabef52bf07f2320a78f657f7252fb3a807b017cd71e3",
-  "approvedAt": "2026-10-31T17:51:20.981Z",
-  "neobase": ">=4.0.0",
-  "signature": "2tF1H3wOeCjeBgSARsSfIO3+6OI7b2Xrf7bEHe7PYgU4oLVlPZUxaLaKXNXJbZ1Wfj6Gq0sU5A6C/LW7AmA6DQ=="
-}

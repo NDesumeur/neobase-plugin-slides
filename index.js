@@ -212,6 +212,10 @@ const SL_THEMES = {
   nuit: {name: 'Nuit', bg: 'linear-gradient(160deg,#0f1b3d,#050914)', text: '#dfe8ff', title: '#7fe0ee', accent: '#ffd07a', font: '"Segoe UI",sans-serif', tfont: '"Segoe UI",sans-serif', tscale: 1},
   aube: {name: 'Aube', bg: 'linear-gradient(135deg,#ff9a62,#e0407a)', text: '#fffaf5', title: '#ffffff', accent: '#3a0a30', font: '"Trebuchet MS",sans-serif', tfont: '"Trebuchet MS",sans-serif', tscale: 1},
   ocean: {name: 'Océan', bg: 'linear-gradient(135deg,#0d8a8a,#103a6a)', text: '#eafcff', title: '#ffffff', accent: '#ffd07a', font: 'Verdana,sans-serif', tfont: 'Georgia,serif', tscale: 1},
+  foret: {name: 'Forêt', bg: 'linear-gradient(150deg,#124a35,#06170f)', text: '#e6fff0', title: '#8affb0', accent: '#ffd07a', font: '"Trebuchet MS",sans-serif', tfont: 'Georgia,serif', tscale: 1},
+  rose: {name: 'Rose', bg: '#fff0f6', text: '#4a2040', title: '#d6247f', accent: '#7a3ad6', font: '"Segoe UI",sans-serif', tfont: '"Segoe UI",sans-serif', tscale: 1},
+  mono: {name: 'Mono', bg: '#111111', text: '#eeeeee', title: '#ffffff', accent: '#f5c518', font: 'Consolas,monospace', tfont: 'Consolas,monospace', tscale: .9},
+  ardoise: {name: 'Ardoise', bg: 'linear-gradient(160deg,#323a48,#222831)', text: '#e5e9f0', title: '#88c0d0', accent: '#ebcb8b', font: '"Segoe UI",sans-serif', tfont: '"Segoe UI",sans-serif', tscale: 1},
   papier: {name: 'Papier', bg: '#f5efe1', text: '#3a3025', title: '#8a3a1a', accent: '#2a6a5a', font: 'Georgia,serif', tfont: 'Georgia,serif', tscale: 1},
 };
 const slElId = () => Math.random().toString(36).slice(2, 9);
@@ -220,6 +224,11 @@ const SL_LAYOUTS = {
   title: ['Titre', () => [slText(80, 170, 800, 120, 'Titre de la présentation', 56, 'title', 'center'), slText(160, 310, 640, 70, 'Sous-titre', 26, 'sub', 'center')]],
   content: ['Titre et texte', () => [slText(60, 40, 840, 90, 'Titre', 40, 'title'), slText(60, 150, 840, 340, '<ul><li>Premier point</li><li>Deuxième point</li><li>Troisième point</li></ul>', 26)]],
   two: ['Deux colonnes', () => [slText(60, 40, 840, 90, 'Titre', 40, 'title'), slText(60, 150, 400, 340, '<ul><li>À gauche</li></ul>', 24), slText(500, 150, 400, 340, '<ul><li>À droite</li></ul>', 24)]],
+  image: ['Image et texte', () => [slText(60, 40, 840, 90, 'Titre', 40, 'title'), slText(60, 150, 400, 340, '<ul><li>Premier point</li><li>Deuxième point</li></ul>', 24), {id: slElId(), t: 'shape', shape: 'round', x: 500, y: 150, w: 400, h: 340}]],
+  quote: ['Citation', () => [slText(100, 130, 760, 230, '« Une phrase qui marque. »', 44, 'title', 'center'), slText(260, 390, 440, 50, '— Auteur', 24, 'sub', 'center')]],
+  stats: ['Chiffres clés', () => [slText(60, 40, 840, 90, 'En chiffres', 40, 'title'), ...[0, 1, 2].flatMap(i => [slText(60 + i * 290, 170, 260, 110, ['42', '1 200', '98 %'][i], 72, 'title', 'center'), slText(60 + i * 290, 300, 260, 80, ['jours', 'utilisateurs', 'satisfaits'][i], 26, 'sub', 'center')])]],
+  plan: ['Plan', () => [slText(60, 40, 840, 90, 'Plan', 40, 'title'), slText(60, 150, 840, 340, '<ol><li>Introduction</li><li>Développement</li><li>Conclusion</li></ol>', 30)]],
+  merci: ['Merci', () => [slText(80, 170, 800, 130, 'Merci !', 72, 'title', 'center'), slText(160, 320, 640, 70, 'Des questions ?', 28, 'sub', 'center')]],
   section: ['Section', () => [slText(80, 210, 800, 120, 'Nouvelle partie', 48, 'title', 'center')]],
   blank: ['Vide', () => []],
 };
@@ -246,7 +255,7 @@ function slDraw(slide, d, box, edit) {
       const fill = e.fill || th.accent, s = e.shape;
       n.innerHTML = `<svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%">${s === 'ellipse' ? `<ellipse cx="50" cy="50" rx="50" ry="50" fill="${fill}"/>`
         : s === 'tri' ? `<polygon points="50,0 100,100 0,100" fill="${fill}"/>` : s === 'arrow' ? `<polygon points="0,35 65,35 65,10 100,50 65,90 65,65 0,65" fill="${fill}"/>`
-        : s === 'line' ? `<rect x="0" y="45" width="100" height="10" fill="${fill}"/>` : `<rect width="100" height="100" rx="${s === 'round' ? 12 : 0}" fill="${fill}"/>`}</svg>`;
+        : s === 'star' ? `<polygon points="50,2 61,36 98,36 68,58 79,94 50,72 21,94 32,58 2,36 39,36" fill="${fill}"/>` : s === 'heart' ? `<path d="M50 92C8 62 0 36 20 18c15-12 30 0 30 12 0-12 15-24 30-12 20 18 12 44-30 74z" fill="${fill}"/>` : s === 'diamond' ? `<polygon points="50,0 100,50 50,100 0,50" fill="${fill}"/>` : s === 'bubble' ? `<path d="M8 4h84a6 6 0 0 1 6 6v58a6 6 0 0 1-6 6H40L18 96V74H8a6 6 0 0 1-6-6V10A6 6 0 0 1 8 4z" fill="${fill}"/>` : s === 'line' ? `<rect x="0" y="45" width="100" height="10" fill="${fill}"/>` : `<rect width="100" height="100" rx="${s === 'round' ? 12 : 0}" fill="${fill}"/>`}</svg>`;
     }
     if (edit && e.id === sl.selId) n.classList.add('sel');
     return n;
@@ -277,10 +286,11 @@ sl.mount = main => {
     ofBtn('🗑', 'Supprimer la diapositive', () => { const d = sl.cur.data; if (d.slides.length < 2) return; d.slides.splice(sl.idx, 1); sl.idx = Math.min(sl.idx, d.slides.length - 1); slSaved(true); }), el('i', 'ofSep'),
     ofBtn('T', 'Zone de texte', () => slAdd(slText(120, 200, 520, 90, 'Texte', 28))),
     ofDrop('Image', [['Depuis un fichier…', () => imgIn.click()], ['Depuis un lien…', async () => { const u = await ask('Lien de l\'image'); if (u) slAddImg(u); }], ['Coller une image (Ctrl+V)', () => toast('Copie une image puis fais Ctrl+V sur la diapositive')]]),
-    ofDrop('Forme', [['Rectangle', 'rect'], ['Rectangle arrondi', 'round'], ['Ellipse', 'ellipse'], ['Triangle', 'tri'], ['Flèche', 'arrow'], ['Ligne', 'line']].map(([l, s]) => [l, () => slAdd({id: slElId(), t: 'shape', shape: s, x: 380, y: 190, w: 200, h: s === 'line' ? 30 : 160})])),
+    ofDrop('Forme', [['Rectangle', 'rect'], ['Rectangle arrondi', 'round'], ['Ellipse', 'ellipse'], ['Triangle', 'tri'], ['Flèche', 'arrow'], ['Étoile', 'star'], ['Cœur', 'heart'], ['Losange', 'diamond'], ['Bulle', 'bubble'], ['Ligne', 'line']].map(([l, s]) => [l, () => slAdd({id: slElId(), t: 'shape', shape: s, x: 380, y: 190, w: 200, h: s === 'line' ? 30 : 160})])),
     ofBtn('A−', 'Texte plus petit', () => slFont(-4)), ofBtn('A+', 'Texte plus grand', () => slFont(4)),
     ofBtn('G', 'Gras', () => slExec('bold'), 'b'), ofBtn('I', 'Italique', () => slExec('italic'), 'i'),
     ofDrop('Aligner', [['À gauche', () => slAlign('left')], ['Centré', () => slAlign('center')], ['À droite', () => slAlign('right')]]), color,
+    ofDrop('Placer', [['Centrer horizontalement', () => slPlaceEl('h')], ['Centrer verticalement', () => slPlaceEl('v')], ['Aligner en haut', () => slPlaceEl('top')], ['Aligner en bas', () => slPlaceEl('bottom')], ['Aligner à gauche', () => slPlaceEl('left')], ['Aligner à droite', () => slPlaceEl('right')]], 'Placer l\'élément sélectionné sur la diapositive'),
     ofDrop('Ordre', [['Premier plan', () => slOrder(1)], ['Arrière-plan', () => slOrder(-1)]], 'Ordre de l\'élément sélectionné'), el('i', 'ofSep'),
     theme, bg, ofBtn('⌀', 'Fond du thème', () => { slCur().bg = null; slSaved(); }), tr, el('i', 'ofSep'),
     ofDrop('▶ Présenter', [['Depuis le début', () => slPresent(0)], ['Depuis cette diapositive', () => slPresent(sl.idx)]], 'Mode présentation'),
@@ -362,6 +372,12 @@ function slExec(c) {  // inside the text being edited, else on the whole box
   const e = slSel(); if (e?.t !== 'text') return toast('Sélectionne une zone de texte', true);
   const t = c === 'bold' ? 'b' : 'i', wrapped = new RegExp('^<' + t + '>([\\s\\S]*)</' + t + '>$').exec(e.html);
   e.html = wrapped ? wrapped[1] : '<' + t + '>' + e.html + '</' + t + '>'; slSaved();
+}
+function slPlaceEl(k) {  // l'élément sélectionné, centré ou collé à un bord (marge de 40)
+  const e = slSel(); if (!e) return toast('Sélectionne un élément', true);
+  if (k === 'h') e.x = Math.round((SL_W - e.w) / 2); else if (k === 'v') e.y = Math.round((SL_H - e.h) / 2);
+  else if (k === 'top') e.y = 40; else if (k === 'bottom') e.y = SL_H - 40 - e.h; else if (k === 'left') e.x = 40; else e.x = SL_W - 40 - e.w;
+  slSaved();
 }
 function slOrder(d) { const s = slCur(), e = slSel(); if (!e) return; s.els = s.els.filter(x => x !== e); d > 0 ? s.els.push(e) : s.els.unshift(e); slSaved(); }
 function slGo(i) { const n = sl.cur.data.slides.length; if (i < 0 || i >= n) return; sl.idx = i; sl.selId = null; slRender(true); }
