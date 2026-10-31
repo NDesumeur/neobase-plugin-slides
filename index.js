@@ -2,12 +2,85 @@
 // Ses données sont dans le dossier du plugin, que NeoBase sauvegarde (synchro cloud et sauvegardes) ; à la première ouverture elle reprend ce que tu avais dans NeoBase.
 // Elle demande l'accès complet pour utiliser les outils d'interface de NeoBase. NeoBase ne l'ouvre que si elle est signée.
 const HTML = "";
+/*CSS-MOVED*/ const CSS = `.ofMenu .tbtn{justify-content:flex-start;font:14px var(--text);letter-spacing:0}
+.ofDropM .tbtn{justify-content:flex-start;font:14px var(--text);letter-spacing:0}
+.ofApp{display:flex;background:var(--bg0)}
+.ofSide{width:260px;flex:none;display:flex;flex-direction:column;gap:10px;padding:18px 14px;border-right:3px solid var(--line);background:rgba(var(--d8),.6);overflow:hidden}
+.ofSide .row{gap:8px}
+.ofSide .btn{flex:1;padding:8px 6px;font-size:9px}
+.ofSearch{padding:7px 10px;font-size:14px}
+.ofList{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:2px;margin:0 -6px;padding:0 6px}
+.ofItem{all:unset;cursor:var(--cp,pointer);display:flex;flex-direction:column;gap:2px;padding:8px 10px;color:var(--lilac)}
+.ofItem .n{color:#fff;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ofItem .hint{font-size:12px}
+.ofItem:hover{background:rgba(255,255,255,.04)}
+.ofItem.on{background:rgba(var(--mgr),.18);box-shadow:inset 3px 0 0 var(--magenta)}
+.ofBody{flex:1;min-width:0;display:flex;flex-direction:column}
+.ofEmpty{flex:1;display:grid;place-items:center;padding:30px}
+.ofEmptyIn{max-width:520px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.ofEmptyIn img{width:96px;height:96px;image-rendering:pixelated}
+.ofEmptyIn h2{font:16px var(--title);color:#fff;margin:0}
+.ofEmptyIn p{font-size:16px;line-height:1.5;margin:0}
+.ofMain{flex:1;min-height:0;display:flex;flex-direction:column}
+.f.ofTitle{margin:12px 16px 0;width:auto;align-self:stretch;font-size:18px;padding:8px 12px;background:transparent;box-shadow:none}
+.ofTitle:focus{background:var(--field)}
+.ofBar{display:flex;flex-wrap:wrap;gap:3px;align-items:center;padding:8px 14px;border-bottom:3px solid var(--line)}
+.ofTb{all:unset;cursor:var(--cp,pointer);min-width:30px;height:30px;padding:0 7px;display:grid;place-items:center;color:var(--lilac);font-size:15px;background:var(--btn)}
+.ofTb:hover{background:var(--btnh);color:#fff}
+.ofTb.on{background:rgba(var(--mgr),.4);color:#fff}
+.ofTb.b{font-weight:bold}
+.ofTb.i{font-style:italic}
+.ofTb.u{text-decoration:underline}
+.ofTb.s{text-decoration:line-through}
+.ofSep{width:2px;height:22px;background:var(--line);margin:0 4px}
+.ofSel{height:30px;padding:0 6px;font-size:14px}
+.ofColor{width:30px;height:30px;padding:0;border:0;background:none;cursor:var(--cp,pointer)}
+.ofDrop{position:relative}
+.ofDrop .ofTb{font-size:14px}
+.ofDropM{position:absolute;top:34px;left:0;z-index:20;--fill:var(--win);--c:var(--line2);display:none;flex-direction:column;min-width:210px;padding:6px;filter:drop-shadow(0 4px 0 var(--out))}
+.ofDrop.on .ofDropM{display:flex}
+.ofDropM .tbtn{padding:8px 10px}
+.ofDropM .tbtn:hover{background:rgba(var(--mgr),.16);color:#fff}
+.ofStatus{padding:6px 16px;font-size:13px;color:var(--muted);border-top:3px solid var(--line)}
+.slRow{flex:1;min-height:0;display:flex}
+.slThumbs{width:200px;flex:none;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;border-right:3px solid var(--line)}
+.slThumb{position:relative;cursor:var(--cp,pointer);display:flex;gap:6px}
+.slThumb .n{font-size:12px;color:var(--muted);width:16px}
+.slThumb.on .slMini{box-shadow:0 0 0 3px var(--magenta)}
+.slMini{position:relative;width:960px;height:540px;zoom:.17;overflow:hidden;pointer-events:none;box-shadow:0 0 0 6px var(--line);flex:none}
+.slCenter{flex:1;min-width:0;display:flex;flex-direction:column}
+.slStageW{flex:1;min-height:0;position:relative;overflow:hidden;background:#1a1426;padding:10px}
+.slStage{position:relative;width:960px;height:540px;overflow:hidden;transform-origin:0 0;box-shadow:0 6px 0 rgba(0,0,0,.4);user-select:none}
+.slEl{position:absolute;overflow:hidden;line-height:1.25;word-wrap:break-word;cursor:move}
+.slEl.sel{outline:2px dashed #ff5ad9;outline-offset:2px}
+.slEl[contenteditable=true]{cursor:text;outline:2px solid #ff5ad9;user-select:text}
+.slEl img{width:100%;height:100%;object-fit:contain;display:block}
+.slEl ul{margin:0;padding-left:1.2em}
+.slEl p{margin:0}
+.slH{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;background:#fff;box-shadow:0 0 0 2px #e01ec8;z-index:5}
+.slH.nw,.slH.se{cursor:nwse-resize}
+.slH.ne,.slH.sw{cursor:nesw-resize}
+.slNotes{height:70px;margin:8px 10px;resize:vertical;font-size:14px}
+.slShow{position:fixed;inset:0;z-index:60;background:#000;cursor:none}
+.slShowStage{position:absolute;left:50%;top:50%;transform-origin:center;box-shadow:none}
+.slShowStage .slEl{cursor:none}
+.slShowN{position:fixed;right:18px;bottom:12px;color:rgba(255,255,255,.4);font:10px var(--title)}
+.slShowStage.tr-fade{animation:slFade .5s ease}
+.slShowStage.tr-zoom{animation:slZoom .45s ease}
+.slShowStage.tr-slide.fwd{animation:slSlide .45s ease}
+.slShowStage.tr-slide.back{animation:slSlideB .45s ease}
+@keyframes slFade{from{opacity:0}}
+@keyframes slZoom{from{opacity:0;scale:.85}}
+@keyframes slSlide{from{translate:30% 0;opacity:0}}
+@keyframes slSlideB{from{translate:-30% 0;opacity:0}}
+`;  // le style de ce plugin (il utilise les variables du thème de NeoBase)
 export default async function (ctx) {
   const view = ctx.view;
   if (!ctx.host) { view.textContent = "Ce plugin doit être approuvé par NeoBase pour s'ouvrir."; return; }
   const host = ctx.host, { el, toast, sfx, ask, newTab, pixIcon, PIX, WX } = host;
   const nbConfirm = host.confirm;  // la boîte de confirmation de NeoBase, à la place de celle de Windows
   const folder = ctx.folder, legacy = ctx.legacy || {};
+  ctx.host.addStyle(CSS);
   view.innerHTML = HTML;
   const $ = id => id === "slidesApp" ? view : (view.querySelector('#' + id) || document.getElementById(id));  // les identifiants de ta vue d'abord, puis ceux de la page (fenêtres, menus)
   const doc = async n => { try { return await folder.read(n); } catch { return null; } };
