@@ -1,0 +1,19 @@
+{
+  "id": "neobase.slides",
+  "name": "NeoSlides",
+  "version": "1.0.0",
+  "author": "NDesumeur",
+  "description": "Des présentations : diapositives, objets, thèmes, mode diaporama. Ouvre et enregistre les fichiers PowerPoint.",
+  "icon": "icon.png",
+  "entry": "index.js",
+  "view": "slides",
+  "neobase": ">=4.0.0",
+  "type": "app",
+  "category": "Bureautique",
+  "mobile": false,
+  "system": false,
+  "dependencies": {},
+  "permissions": [
+    "full"
+  ]
+}
