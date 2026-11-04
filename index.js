@@ -1,6 +1,6 @@
 // NeoSlides : ton appli d'origine (HTML et code inchangés), livrée en plugin.
-// Ses données sont dans le dossier du plugin, que NeoBase sauvegarde (synchro cloud et sauvegardes) ; à la première ouverture elle reprend ce que tu avais dans NeoBase.
-// Elle tourne dans le bac à sable de NeoBase, avec ses outils d'interface (ctx.host) et seulement les autorisations de son plugin.json.
+// Ses données sont dans le dossier du plugin, que NeoDex sauvegarde (synchro cloud et sauvegardes) ; à la première ouverture elle reprend ce que tu avais dans NeoDex.
+// Elle tourne dans le bac à sable de NeoDex, avec ses outils d'interface (ctx.host) et seulement les autorisations de son plugin.json.
 const HTML = "";
 /*CSS-MOVED*/ const CSS = `.ofMenu .tbtn{justify-content:flex-start;font:14px var(--text);letter-spacing:0}
 .ofDropM .tbtn{justify-content:flex-start;font:14px var(--text);letter-spacing:0}
@@ -73,12 +73,12 @@ const HTML = "";
 @keyframes slZoom{from{opacity:0;scale:.85}}
 @keyframes slSlide{from{translate:30% 0;opacity:0}}
 @keyframes slSlideB{from{translate:-30% 0;opacity:0}}
-`;  // le style de ce plugin (il utilise les variables du thème de NeoBase)
+`;  // le style de ce plugin (il utilise les variables du thème de NeoDex)
 export default async function (ctx) {
   const view = ctx.view;
-  if (!ctx.host) { view.textContent = "Ce plugin doit être approuvé par NeoBase pour s'ouvrir."; return; }
+  if (!ctx.host) { view.textContent = "Ce plugin doit être approuvé par NeoDex pour s'ouvrir."; return; }
   const host = ctx.host, { el, toast, sfx, ask, newTab, pixIcon, PIX, WX } = host;
-  const nbConfirm = host.confirm;  // la boîte de confirmation de NeoBase, à la place de celle de Windows
+  const nbConfirm = host.confirm;  // la boîte de confirmation de NeoDex, à la place de celle de Windows
   const folder = ctx.folder, legacy = ctx.legacy || {};
   ctx.host.addStyle(CSS);
   view.innerHTML = HTML;
@@ -232,7 +232,7 @@ const SL_LAYOUTS = {
   section: ['Section', () => [slText(80, 210, 800, 120, 'Nouvelle partie', 48, 'title', 'center')]],
   blank: ['Vide', () => []],
 };
-const sl = {kind: 'slides', key: 'neodyme:slides', view: 'slidesApp', name: 'NeoSlides', newName: 'Présentation', openHint: 'Ouvrir une présentation NeoSlides (.neoslides)',
+const sl = {kind: 'slides', key: 'neodex:slides', view: 'slidesApp', name: 'NeoSlides', newName: 'Présentation', openHint: 'Ouvrir une présentation NeoSlides (.neoslides)',
   intro: 'Présentations : diapositives avec textes, images et formes à placer à la souris, thèmes, transitions, notes et mode présentation plein écran. Enregistrées toutes seules et synchronisées entre tes PC ; export en PDF.',
   newData: () => ({theme: 'neo', slides: [{id: slElId(), bg: null, tr: 'fade', notes: '', els: SL_LAYOUTS.title[1]()}]}),
   fromImport: r => r.slides,
@@ -403,7 +403,7 @@ function slRender(all) {
   sl.thumbs.scrollTop = keep;
   void all;
 }
-// presentation: the whole NeoBase window, one slide at a time
+// presentation: the whole NeoDex window, one slide at a time
 function slPresent(from) {
   const d = sl.cur.data, ov = el('div', 'slShow'), box = el('div', 'slStage slShowStage'), count = el('div', 'slShowN');
   let i = from;

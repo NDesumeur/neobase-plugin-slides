@@ -1,6 +1,6 @@
 {
-  "pluginId": "neobase.slides",
-  "repo": "NDesumeur/neobase-plugin-slides",
+  "pluginId": "neodex.slides",
+  "repo": "NDesumeur/neodex-plugin-slides",
   "version": "1.1.1",
   "sha256": "e351fc0e474f2da5e2294b2fef4f25a1e5e8fd835a9e52e43b4ea2f868911901",
   "approvedAt": "2026-11-01T00:16:26.471Z",
