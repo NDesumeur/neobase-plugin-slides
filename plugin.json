@@ -1,7 +1,7 @@
 {
   "id": "neodex.slides",
   "name": "NeoSlides",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "NDesumeur",
   "description": "Des présentations : diapositives, objets, thèmes, mode diaporama. Ouvre et enregistre les fichiers PowerPoint.",
   "icon": "icon.png",
